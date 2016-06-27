@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        <div class="w3-container w3-theme-dark">
+            <h2>Effettua l'autenticazione</h2>
+        </div>
+        <h:form class="w3-container">
+
+            <h:outputLabel value="username"/>
+            <h:inputText class="w3-input w3-border w3-margin-bottom" 
+                         p:placeholder="inserisci il tuo nickname" value="#{login.nick}"
+                         required="true" requiredMessage="il nickname è obbligatorio"/>
+
+            <h:outputLabel value="password"/>
+            <h:inputSecret class="w3-input w3-border" 
+                           p:placeholder="inserisci la tua password" value="#{login.pwd}"
+                  required="true" requiredMessage="la password è obbligatoria"/>
+
+            <h:commandButton class="w3-btn w3-theme-action" 
+                             action="#{login.checkLogin}" value="Login"></h:commandButton>
+            
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

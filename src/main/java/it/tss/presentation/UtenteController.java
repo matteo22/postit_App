@@ -29,6 +29,10 @@ public class UtenteController implements Serializable {
     private UtenteFacade srvUtente;
     private List<Utente> items = null;
     private Utente selected;
+    
+    private String nick;
+    private String pwd;
+    
 
     public UtenteController() {
     }
@@ -51,20 +55,7 @@ public class UtenteController implements Serializable {
         return srvUtente;
     }
 
-    public void checkLogin(Utente u) {
-
-        Utente find = srvUtente.find(u);
-        if (find != null) {
-            FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO,
-                    "Login effettuato.",
-                    ""));
-        } else {
-            FacesContext.getCurrentInstance().
-                    addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "Login non effettuato.",
-                            ""));
-        }
-    }
+    
 
     public Utente prepareCreate() {
         selected = new Utente();
