@@ -33,6 +33,40 @@
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPostitTitle_testo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.testo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPostitTitle_dataCreazione}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dataCreazione}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPostitTitle_dataScadenza}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dataScadenza}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPostitTitle_utente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.utente}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPostitTitle_tags}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tags}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{postitController.prepareCreate}" update=":PostitCreateForm" oncomplete="PF('PostitCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PostitViewForm" oncomplete="PF('PostitViewDialog').show()" disabled="#{empty postitController.selected}"/>

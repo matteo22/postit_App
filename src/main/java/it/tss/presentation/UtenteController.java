@@ -14,17 +14,19 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("utenteController")
 @SessionScoped
 public class UtenteController implements Serializable {
 
-    @EJB
-    private it.tss.business.boundary.UtenteFacade ejbFacade;
+    @Inject
+    private UtenteFacade srvUtente;
     private List<Utente> items = null;
     private Utente selected;
 
@@ -46,7 +48,22 @@ public class UtenteController implements Serializable {
     }
 
     private UtenteFacade getFacade() {
-        return ejbFacade;
+        return srvUtente;
+    }
+
+    public void checkLogin(Utente u) {
+
+        Utente find = srvUtente.find(u);
+        if (find != null) {
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "Login effettuato.",
+                    ""));
+        } else {
+            FacesContext.getCurrentInstance().
+                    addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Login non effettuato.",
+                            ""));
+        }
     }
 
     public Utente prepareCreate() {

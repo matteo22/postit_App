@@ -33,6 +33,18 @@
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUtenteTitle_username}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.username}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUtenteTitle_pwd}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pwd}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{utenteController.prepareCreate}" update=":UtenteCreateForm" oncomplete="PF('UtenteCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":UtenteViewForm" oncomplete="PF('UtenteViewDialog').show()" disabled="#{empty utenteController.selected}"/>
