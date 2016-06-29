@@ -39,6 +39,9 @@
                     </c:if>
 
                     <c:if test="${not empty userSession.loggedUser}">
+                        <p:menuitem value="Home" outcome="/utente/home" icon="ui-icon-star">
+                            <f:param name="i" value="0" />
+                        </p:menuitem>
                         <p:menuitem value="Pubblica" outcome="/postit/List" icon="ui-icon-document">
                             <f:param name="i" value="2" />
                         </p:menuitem>
