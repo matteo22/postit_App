@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="body">
+        <h:form>
+        <h:outputLabel value="username"/>
+        <h:inputText 
+            p:placeholder="inserisci il tuo nickname" value="#{login.user.username}"
+            required="true" requiredMessage="il nickname è obbligatorio"/>
+
+        <br/>
+        <br/>
+
+        <h:outputLabel value="password"/>
+        <h:inputSecret 
+            p:placeholder="inserisci la tua password" value="#{login.user.pwd}"
+            required="true" requiredMessage="la password è obbligatoria"/>
+        <br/>
+        <br/>
+
+        <h:commandButton action="#{login.onLogin()}" value="Login"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

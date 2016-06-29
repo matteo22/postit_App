@@ -8,6 +8,8 @@ package it.tss.presentation;
 import it.tss.business.boundary.Security;
 import it.tss.business.boundary.UsersCache;
 import it.tss.business.boundary.UtenteSrv;
+import it.tss.business.entity.Utente;
+import it.tss.presentation.util.JsfUtil;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 
@@ -25,8 +27,7 @@ import javax.inject.Named;
 @SessionScoped
 public class Login implements Serializable {
 
-    private String nick;
-    private String pwd;
+    private Utente user;
 
     @Inject
     Security security;
@@ -36,50 +37,33 @@ public class Login implements Serializable {
 
     @Inject
     UsersCache userscache;
-            
+
     @Inject
     UtenteSrv utentesrv;
 
-    public String getNick() {
-        return nick;
+    public Utente getUser() {
+        return user;
     }
 
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setUser(Utente user) {
+        this.user = user;
     }
 
     public String onLogin() {
 
-        boolean login = security.login(nick, pwd);
+        boolean login = security.login(user.getUsername(), user.getPwd());
 
-        if (login) {
-
-            sessiondata.setLoggedUser(nick);
-
-            FacesContext.getCurrentInstance().
-                    addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO,
-                            "Login effettuato.",
-                            ""));
-           return "/utente/List.jsf/faces-redirect=true";
-
-        } else {
-
-            FacesContext.getCurrentInstance().
-                    addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "Login non effettuato.",
-                            ""));
+        if(login){
+        
+        sessiondata.setLoggedUser(user.toString());
+            
+            
+            return "utente/List.jsf/faces-redirect=true";
 
         }
-
+        
+        JsfUtil.addErrorMessage("LOGIN ERRATA!!");
         return null;
-
     }
+    
 }

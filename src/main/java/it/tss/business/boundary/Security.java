@@ -32,6 +32,7 @@ public class Security {
         try {
             Utente u = utenteSrv.findByUsrPwd(usr, pwd);
             usersCache.addUser(u);
+           
             return true;
         } catch (EJBException ex) {
             return false;

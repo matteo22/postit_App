@@ -4,21 +4,26 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
 
     <ui:composition>
 
         <p:dialog id="UtenteViewDlg" widgetVar="UtenteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUtenteTitle}">
             <h:form id="UtenteViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{utenteController.selected != null}">
-                        <h:outputText value="#{bundle.ViewUtenteLabel_id}"/>
-                        <h:outputText value="#{utenteController.selected.id}" title="#{bundle.ViewUtenteTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewUtenteLabel_username}"/>
-                        <h:outputText value="#{utenteController.selected.username}" title="#{bundle.ViewUtenteTitle_username}"/>
-                        <h:outputText value="#{bundle.ViewUtenteLabel_pwd}"/>
-                        <h:outputText value="#{utenteController.selected.pwd}" title="#{bundle.ViewUtenteTitle_pwd}"/>
-                    </p:panelGrid>
+                    
+                    <p:panelGrid columns="2" rendered="#{not userSession.loggedUser}">
+                            <h:outputText value="#{bundle.ViewUtenteLabel_id}"/>
+                            <h:outputText value="#{utenteController.selected.id}" title="#{bundle.ViewUtenteTitle_id}"/>
+                            <h:outputText value="#{bundle.ViewUtenteLabel_username}"/>
+                            <h:outputText value="#{utenteController.selected.username}" title="#{bundle.ViewUtenteTitle_username}"/>
+                            <h:outputText value="#{bundle.ViewUtenteLabel_pwd}"/>
+                            <h:outputText value="#{utenteController.selected.pwd}" title="#{bundle.ViewUtenteTitle_pwd}"/>
+
+                        </p:panelGrid>
+                 
                     <p:commandButton value="#{bundle.Close}" onclick="UtenteViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
