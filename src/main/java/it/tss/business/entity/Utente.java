@@ -12,11 +12,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author tss
  */
+@NamedQueries({
+    @NamedQuery(name = "Utente.findByUsrPwd",
+            query = "select e from Utente e where e.username= :usr and e.pwd= :pwd"),
+    @NamedQuery(name = "Utente.findByNick",
+            query = "select e from Utente e where e.username like :usr")
+}
+)
 @Entity
 public class Utente implements Serializable{
     @Id
@@ -54,6 +63,14 @@ public class Utente implements Serializable{
     }
 
     @Override
+    public String toString() {
+        return username;
+    }
+    
+    
+    
+
+    @Override
     public int hashCode() {
         int hash = 3;
         hash = 83 * hash + Objects.hashCode(this.id);
@@ -78,10 +95,10 @@ public class Utente implements Serializable{
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Utente{" + "id=" + id + ", username=" + username + ", pwd=" + pwd + '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Utente{" + "id=" + id + ", username=" + username + ", pwd=" + pwd + '}';
+//    }
     
     
     

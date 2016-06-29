@@ -27,29 +27,26 @@ import javax.persistence.TemporalType;
 @Entity
 public class Postit implements Serializable {
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(length = 2048)
     private String testo;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCreazione;
-    
+
     @Temporal(TemporalType.DATE)
     private Date dataScadenza;
-    
+
     @ManyToOne
     private Utente utente;
-    
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "postit_tags")
     private Set<String> tags;
 
-    
-    
     public Long getId() {
         return id;
     }
@@ -97,9 +94,6 @@ public class Postit implements Serializable {
     public void setTags(Set<String> tags) {
         this.tags = tags;
     }
-    
-    
-    
 
     @Override
     public int hashCode() {
@@ -125,5 +119,5 @@ public class Postit implements Serializable {
     public String toString() {
         return "it.tss.postit.business.entity.Postit[ id=" + id + " ]";
     }
-    
+
 }

@@ -5,43 +5,40 @@
  */
 package it.tss.presentation;
 
-
-import it.tss.business.boundary.UtenteFacade;
-import it.tss.business.entity.Utente;
-import it.tss.webapp.business.boundary.Security;
-import it.tss.webapp.business.boundary.UsersCache;
-import it.tss.webapp.business.boundary.UtenteSrv;
+import it.tss.business.boundary.Security;
+import it.tss.business.boundary.UsersCache;
+import it.tss.business.boundary.UtenteSrv;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+
 import javax.inject.Named;
 
 /**
  *
  * @author tss
  */
-@Named(value="login")
+@Named(value = "login")
 @SessionScoped
 public class Login implements Serializable {
 
     private String nick;
     private String pwd;
-    
-    
+
     @Inject
     Security security;
 
     @Inject
-    UsersCache usercache;
+    SessionData sessiondata;
 
+    @Inject
+    UsersCache userscache;
+            
     @Inject
     UtenteSrv utentesrv;
-
-    @Inject
-    it.tss.webapp.presentation.SessionData sessiondata;
 
     public String getNick() {
         return nick;
@@ -59,11 +56,6 @@ public class Login implements Serializable {
         this.pwd = pwd;
     }
 
-  
-  
-   
-    
-
     public String onLogin() {
 
         boolean login = security.login(nick, pwd);
@@ -71,12 +63,12 @@ public class Login implements Serializable {
         if (login) {
 
             sessiondata.setLoggedUser(nick);
-            
+
             FacesContext.getCurrentInstance().
                     addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "Login effettuato.",
                             ""));
-            return "";
+           return "/utente/List.jsf/faces-redirect=true";
 
         } else {
 
@@ -86,7 +78,7 @@ public class Login implements Serializable {
                             ""));
 
         }
-        
+
         return null;
 
     }

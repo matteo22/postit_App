@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.tss.webapp.business.boundary;
-
+package it.tss.business.boundary;
 
 import it.tss.business.entity.Utente;
-import java.util.Date;
+
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
@@ -20,7 +19,9 @@ import javax.persistence.PersistenceContext;
  *
  * @author tss
  */
-@Named(value = "userService")
+
+    
+    @Named(value = "userService")
 @Stateless
 public class UtenteSrv {
     
@@ -44,7 +45,7 @@ public class UtenteSrv {
     
     public Utente findByUsrPwd(String nick, String pwd){
         return em.createNamedQuery("Utente.findByUsrPwd", Utente.class)
-                .setParameter("usr",nick )
+                .setParameter("usr", nick)
                 .setParameter("pwd", pwd)
                 .getSingleResult();
     }
@@ -61,7 +62,7 @@ public class UtenteSrv {
         return em.find(Utente.class, key);
     }
     
-   
+    
 
     public List<Utente> findLikeNick(String nick) {
         List result = em.createNamedQuery("Utente.findByNick")
@@ -70,3 +71,5 @@ public class UtenteSrv {
         return result;
     }
 }
+    
+

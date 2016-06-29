@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.tss.webapp.presentation;
+package it.tss.presentation;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
@@ -15,8 +15,8 @@ import javax.inject.Named;
  */
 @Named(value = "userSession")
 @SessionScoped
-public class SessionData implements Serializable{
-    
+public class SessionData implements Serializable {
+
     private String loggedUser;
 
     public String getLoggedUser() {
@@ -26,5 +26,5 @@ public class SessionData implements Serializable{
     public void setLoggedUser(String loggedUser) {
         this.loggedUser = loggedUser;
     }
-    
+
 }

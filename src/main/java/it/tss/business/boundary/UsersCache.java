@@ -3,14 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.tss.webapp.business.boundary;
-
+package it.tss.business.boundary;
 
 import it.tss.business.entity.Utente;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.ejb.ConcurrencyManagement;
@@ -24,7 +21,8 @@ import javax.inject.Named;
  *
  * @author tss
  */
-@Named(value = "ucache")
+
+    @Named(value = "ucache")
 @Singleton
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class UsersCache {
@@ -42,7 +40,7 @@ public class UsersCache {
     public List<Utente> loggedUsers() {
         List<Utente> result = new ArrayList<>();
         for (Utente utente : users.values()) {
-            
+           
         }
         return result;
     }
@@ -57,3 +55,6 @@ public class UsersCache {
         addUser(event.getUtente());
     }
 }
+
+    
+
