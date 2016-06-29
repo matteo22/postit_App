@@ -14,10 +14,10 @@
                     <p:panelGrid columns="2" rendered="#{utenteController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateUtenteLabel_id}" for="id" />
                         <p:inputText id="id" value="#{utenteController.selected.id}" title="#{bundle.CreateUtenteTitle_id}" />
-                        <p:outputLabel value="#{bundle.CreateUtenteLabel_username}" for="username" />
-                        <p:inputText id="username" value="#{utenteController.selected.username}" title="#{bundle.CreateUtenteTitle_username}" />
+                        <p:outputLabel value="#{bundle.CreateUtenteLabel_username}" for="username"  />
+                        <p:inputText id="username" value="#{utenteController.selected.username}" title="#{bundle.CreateUtenteTitle_username}" required="true" requiredMessage="username obbligatorio" />
                         <p:outputLabel value="#{bundle.CreateUtenteLabel_pwd}" for="pwd" />
-                        <p:inputText id="pwd" value="#{utenteController.selected.pwd}" title="#{bundle.CreateUtenteTitle_pwd}" />
+                        <p:inputText id="pwd" value="#{utenteController.selected.pwd}" title="#{bundle.CreateUtenteTitle_pwd}" required="true" requiredMessage="password obbligatoria"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{utenteController.create}" value="#{bundle.Save}" update="display,:UtenteListForm:datalist,:growl" oncomplete="handleSubmit(args,'UtenteCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UtenteCreateDialog.hide()"/>

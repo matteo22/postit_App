@@ -8,6 +8,9 @@ package it.tss.presentation;
 
 import it.tss.business.boundary.UtenteFacade;
 import it.tss.business.entity.Utente;
+import it.tss.webapp.business.boundary.Security;
+import it.tss.webapp.business.boundary.UsersCache;
+import it.tss.webapp.business.boundary.UtenteSrv;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 
@@ -29,9 +32,17 @@ public class Login implements Serializable {
     
     
     @Inject
-    UtenteFacade utentesrv;
-   
-        
+    Security security;
+
+    @Inject
+    UsersCache usercache;
+
+    @Inject
+    UtenteSrv utentesrv;
+
+    @Inject
+    it.tss.webapp.presentation.SessionData sessiondata;
+
     public String getNick() {
         return nick;
     }
@@ -49,22 +60,34 @@ public class Login implements Serializable {
     }
 
   
-    
+  
+   
     
 
-    public void checkLogin(Utente u) {
+    public String onLogin() {
 
-        Utente find = utentesrv.find(u);
-        if (find != null) {
-            FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO,
-                    "Login effettuato.",
-                    ""));
+        boolean login = security.login(nick, pwd);
+
+        if (login) {
+
+            sessiondata.setLoggedUser(nick);
+            
+            FacesContext.getCurrentInstance().
+                    addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Login effettuato.",
+                            ""));
+            return "";
+
         } else {
+
             FacesContext.getCurrentInstance().
                     addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "Login non effettuato.",
                             ""));
-        }
-    }
 
+        }
+        
+        return null;
+
+    }
 }

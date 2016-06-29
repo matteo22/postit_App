@@ -5,8 +5,10 @@
  */
 package it.tss.business.boundary;
 
+import it.tss.business.entity.Utente;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -15,6 +17,8 @@ import javax.persistence.EntityManager;
 public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;
+    @PersistenceContext
+    private EntityManager em;
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -33,9 +37,15 @@ public abstract class AbstractFacade<T> {
     public void remove(T entity) {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
-
-    public T find(Object id) {
+     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
+    }
+
+    public T findByNick(String nick) {
+        
+        return (T) em.createNamedQuery("Utente.findByNick", Utente.class)
+                .setParameter("usr",nick )
+                .getSingleResult();
     }
 
     public List<T> findAll() {
